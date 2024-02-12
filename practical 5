@@ -1,0 +1,74 @@
+import java.util.Random;
+
+public class PrimeCounter {
+    public static void main(String[] args) {
+        
+        int[] numbers = generateRandomNumbers(1000000);
+
+        
+        long startTime = System.currentTimeMillis();
+        int primeCount = countPrimes(numbers);
+        long endTime = System.currentTimeMillis();
+        long timeTaken = endTime - startTime;
+
+        
+        int nonPrimeCount = numbers.length - primeCount;
+
+        System.out.println("Prime Count: " + primeCount);
+        System.out.println("Non-Prime Count: " + nonPrimeCount);
+        System.out.println("Time taken to count primes: " + timeTaken + " milliseconds");
+
+        
+        reverseArray(numbers);
+
+        
+        startTime = System.currentTimeMillis();
+        primeCount = countPrimes(numbers);
+        endTime = System.currentTimeMillis();
+        timeTaken = endTime - startTime;
+
+        System.out.println("Prime Count after reversing: " + primeCount);
+        System.out.println("Non-Prime Count after reversing: " + nonPrimeCount);
+        System.out.println("Time taken to count primes after reversing: " + timeTaken + " milliseconds");
+    }
+
+
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    
+    public static int countPrimes(int[] arr) {
+        int count = 0;
+        for (int num : arr) {
+            if (isPrime(num)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+   
+    public static int[] generateRandomNumbers(int size) {
+        Random rand = new Random();
+        int[] numbers = new int[size];
+        for (int i = 0; i < size; i++) {
+            numbers[i] = rand.nextInt(9000000) + 1000000; 
+        }
+        return numbers;
+    }
+
+    public static void reverseArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = isPrime(arr[i]) ? arr[i] : arr[i] + 1; 
+        }
+    }
+}
