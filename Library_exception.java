@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-// Define Library interface
+
 interface Library {
     void displayBooks();
     void borrowBook(String title) throws BookNotAvailableException;
@@ -8,21 +8,20 @@ interface Library {
     void addBook(Book book) throws LibraryFullException;
 }
 
-// Custom exception for when the book is not available
 class BookNotAvailableException extends Exception {
     public BookNotAvailableException(String message) {
         super(message);
     }
 }
 
-// Custom exception for when the book is not found
+
 class BookNotFoundException extends Exception {
     public BookNotFoundException(String message) {
         super(message);
     }
 }
 
-// Custom exception for when the library is full
+
 class LibraryFullException extends Exception {
     public LibraryFullException(String message) {
         super(message);
@@ -39,7 +38,7 @@ public class Librarybooks implements Library {
         String author;
         boolean available;
 
-        // Constructor for Book class
+        
         public Book(String title, String author) {
             this.title = title;
             this.author = author;
@@ -47,14 +46,13 @@ public class Librarybooks implements Library {
         }
     }
 
-    // Constructor for Librarybooks class
+    
     public Librarybooks() {
         books = new Book[Maxbooks];
         numBooks = 0;
     }
 
-    // Implementation of displayBooks method from Library interface
-    @Override
+    
     public void displayBooks() {
         System.out.println("Library Books:");
         for (int i = 0; i < numBooks; i++) {
@@ -64,8 +62,7 @@ public class Librarybooks implements Library {
         }
     }
 
-    // Implementation of borrowBook method from Library interface
-    @Override
+    
     public void borrowBook(String title) throws BookNotAvailableException {
         for (int i = 0; i < numBooks; i++) {
             if (books[i] != null && books[i].title.equalsIgnoreCase(title)) {
@@ -81,8 +78,7 @@ public class Librarybooks implements Library {
         throw new BookNotFoundException("Book '" + title + "' not found in the library.");
     }
 
-    // Implementation of returnBook method from Library interface
-    @Override
+    
     public void returnBook(String title) throws BookNotFoundException {
         for (int i = 0; i < numBooks; i++) {
             if (books[i] != null && books[i].title.equalsIgnoreCase(title)) {
@@ -98,8 +94,7 @@ public class Librarybooks implements Library {
         throw new BookNotFoundException("Book '" + title + "' not found in the library.");
     }
 
-    // Implementation of addBook method from Library interface
-    @Override
+    
     public void addBook(Book book) throws LibraryFullException {
         if (numBooks < Maxbooks) {
             books[numBooks++] = book;
